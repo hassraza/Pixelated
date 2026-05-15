@@ -1,64 +1,48 @@
-# Pixelated Digital Image Studio
+🎨 Pixelated Digital Image Studio
 
-Pixelated Digital Image Studio is a full-stack image editing project built for a final submission report. It combines a **FastAPI backend** for image processing with a **single-page frontend** for uploading, editing, comparing, and exporting images.
+Pixelated Digital Image Studio is a full-stack image editing application built as a final submission project. It combines a FastAPI backend for image processing with a single-page frontend for interactive editing, comparison, and export.
 
-The project focuses on a clean workflow:
-1. Upload an image.
-2. Apply one or more transformations.
-3. Compare the original and edited result.
-4. Export the final image in a common format.
+🌐 Live Demo:
+👉 https://pixelated-two.vercel.app/
 
----
+📌 Project Overview
 
-## Project Overview
+This application provides a browser-based image editing workspace with a smooth and intuitive workflow:
 
-The application provides a browser-based editing workspace with common image manipulation tools such as grayscale, blur, sharpen, brightness, contrast, saturation, invert, sepia, rotate, flip, edge detection, emboss, pixelate, resize, and crop.
+Upload an image
+Apply one or more transformations
+Compare original vs edited result
+Export the final image
 
-The frontend is implemented as a static HTML application in `frontend/index.html`, while the backend exposes image-processing endpoints through FastAPI in `backend/main.py`.
+The frontend is implemented as a static HTML application, while the backend exposes powerful image-processing APIs.
 
----
-
-## Objectives
-
-- Build a usable image editing interface in the browser.
-- Provide a backend API that performs reliable image transformations.
-- Support common import/export formats.
-- Keep the design lightweight and easy to run locally for review or submission.
-
----
-
-## Technology Stack
-
-- **Backend:** FastAPI, Uvicorn, Pillow
-- **Frontend:** HTML, Tailwind CSS via CDN, vanilla JavaScript
-- **Browser support:** Modern desktop browsers
-- **Development language:** Python 3.12
-
----
-
-## Features
-
-### Frontend
-- Drag-and-drop or click-to-upload image import.
-- Editor workspace with tool rail, canvas area, and control panel.
-- Live API status indicator.
-- Undo and reset actions.
-- Before/after comparison slider.
-- Export options for PNG, JPEG, and WEBP.
-- Zoom controls for closer inspection.
-- Operation history for reviewing applied steps.
-
-### Backend
-- Health check and operations listing endpoints.
-- Image processing endpoints under `/api/process/*`.
-- Base64 encoded image responses for easy frontend display.
-- Cross-origin support for local frontend development.
-
----
-
-## Project Structure
-
-```text
+🎯 Objectives
+Build a user-friendly browser-based image editor
+Develop a reliable backend API for image transformations
+Support common image formats for import/export
+Keep the system lightweight and easy to run locally
+🛠️ Technology Stack
+Layer	Technology
+Backend	FastAPI, Uvicorn, Pillow
+Frontend	HTML, Tailwind CSS (CDN), Vanilla JavaScript
+Language	Python 3.12
+Browser Support	Modern desktop browsers
+✨ Features
+🖥️ Frontend
+Drag-and-drop or click-to-upload image import
+Interactive editor workspace (tool rail, canvas, control panel)
+Live API status indicator
+Undo and reset functionality
+Before/after comparison slider
+Zoom controls for detailed inspection
+Export options: PNG, JPEG, WEBP
+Operation history tracking
+⚙️ Backend
+Health check and service status endpoints
+Image processing API endpoints
+Base64-encoded image responses
+CORS support for frontend-backend integration
+🧩 Project Structure
 pixelated/
 ├── backend/
 │   ├── main.py
@@ -67,91 +51,58 @@ pixelated/
 │   └── index.html
 ├── README.md
 └── vercel.json
-```
+🔌 Backend API
+Utility Endpoints
+GET /api/ → Service status
+GET /api/health → Health check
+GET /api/operations → List supported operations
+Image Processing Endpoints
+POST /api/process/grayscale
+POST /api/process/blur
+POST /api/process/sharpen
+POST /api/process/brightness
+POST /api/process/contrast
+POST /api/process/saturation
+POST /api/process/invert
+POST /api/process/sepia
+POST /api/process/rotate
+POST /api/process/flip
+POST /api/process/edge-detect
+POST /api/process/emboss
+POST /api/process/pixelate
+POST /api/process/resize
+POST /api/process/crop
 
----
+📌 All endpoints:
 
-## Backend API Summary
-
-### Utility endpoints
-- `GET /api/` - service status
-- `GET /api/health` - health check
-- `GET /api/operations` - list supported operations
-
-### Image processing endpoints
-- `POST /api/process/grayscale`
-- `POST /api/process/blur`
-- `POST /api/process/sharpen`
-- `POST /api/process/brightness`
-- `POST /api/process/contrast`
-- `POST /api/process/saturation`
-- `POST /api/process/invert`
-- `POST /api/process/sepia`
-- `POST /api/process/rotate`
-- `POST /api/process/flip`
-- `POST /api/process/edge-detect`
-- `POST /api/process/emboss`
-- `POST /api/process/pixelate`
-- `POST /api/process/resize`
-- `POST /api/process/crop`
-
-All processing endpoints accept an uploaded image file and return the edited result as Base64-encoded PNG data.
-
----
-
-## Setup and Run
-
-### 1. Install backend dependencies
-
-```bash
+Accept an uploaded image file
+Return edited image as Base64-encoded PNG
+🚀 Setup & Run
+1️⃣ Install Backend Dependencies
 cd backend
 pip install -r requirements.txt
-```
-
-### 2. Start the backend server
-
-```bash
+2️⃣ Start Backend Server
 uvicorn main:app --host 0.0.0.0 --port 8000
-```
 
-The API will be available at:
+📍 API available at:
 
-- `http://localhost:8000/api/health`
-- `http://localhost:8000/docs`
-
-### 3. Run the frontend
-
-Option 1: open `frontend/index.html` directly in a browser.
-
-Option 2: serve the folder locally:
-
-```bash
+http://localhost:8000/api/health
+http://localhost:8000/docs
+3️⃣ Run Frontend
+Option 1: Direct Open
+Open frontend/index.html in your browser
+Option 2: Local Server
 cd frontend
 python -m http.server 3000
-```
 
-Then open:
+Then visit:
 
-- `http://localhost:3000`
+http://localhost:3000
+✅ Verification
 
----
+The backend was successfully tested locally:
 
-## Verification
+GET /api/health
+{"status": "healthy"}
 
-The backend was verified locally after setup with a successful health check:
-
-- `GET /api/health` returned `{"status":"healthy"}`
-
-This confirms the API starts correctly and is ready for the frontend.
-
----
-
-## Submission Notes
-
-This project is suitable for a final submission because it demonstrates:
-
-- a working client-server architecture,
-- a complete set of practical image editing features,
-- a clean and responsive browser UI,
-- and a documented local setup process for reviewers.
-
+✔ Confirms API is running correctly and ready for frontend integration

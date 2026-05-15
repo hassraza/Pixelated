@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 import io
 import base64
-import numpy as np
 from typing import Optional
 
 app = FastAPI(title="PixelForge API", version="1.0.0")

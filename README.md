@@ -1,98 +1,157 @@
-# PixelForge — Digital Image Studio
+# Pixelated Digital Image Studio
 
-A full-stack image processing app with a **FastAPI backend** and **Studio Precision** frontend.  
-The frontend is a fully functional single-page app matching the design system from your UI specs.
+Pixelated Digital Image Studio is a full-stack image editing project built for a final submission report. It combines a **FastAPI backend** for image processing with a **single-page frontend** for uploading, editing, comparing, and exporting images.
+
+The project focuses on a clean workflow:
+1. Upload an image.
+2. Apply one or more transformations.
+3. Compare the original and edited result.
+4. Export the final image in a common format.
 
 ---
 
-## 🗂 Project Structure
+## Project Overview
 
-```
-pixelforge/
+The application provides a browser-based editing workspace with common image manipulation tools such as grayscale, blur, sharpen, brightness, contrast, saturation, invert, sepia, rotate, flip, edge detection, emboss, pixelate, resize, and crop.
+
+The frontend is implemented as a static HTML application in `frontend/index.html`, while the backend exposes image-processing endpoints through FastAPI in `backend/main.py`.
+
+---
+
+## Objectives
+
+- Build a usable image editing interface in the browser.
+- Provide a backend API that performs reliable image transformations.
+- Support common import/export formats.
+- Keep the design lightweight and easy to run locally for review or submission.
+
+---
+
+## Technology Stack
+
+- **Backend:** FastAPI, Uvicorn, Pillow
+- **Frontend:** HTML, Tailwind CSS via CDN, vanilla JavaScript
+- **Browser support:** Modern desktop browsers
+- **Development language:** Python 3.12
+
+---
+
+## Features
+
+### Frontend
+- Drag-and-drop or click-to-upload image import.
+- Editor workspace with tool rail, canvas area, and control panel.
+- Live API status indicator.
+- Undo and reset actions.
+- Before/after comparison slider.
+- Export options for PNG, JPEG, and WEBP.
+- Zoom controls for closer inspection.
+- Operation history for reviewing applied steps.
+
+### Backend
+- Health check and operations listing endpoints.
+- Image processing endpoints under `/api/process/*`.
+- Base64 encoded image responses for easy frontend display.
+- Cross-origin support for local frontend development.
+
+---
+
+## Project Structure
+
+```text
+pixelated/
 ├── backend/
-│   ├── main.py           # FastAPI app — all 17 processing endpoints
-│   └── requirements.txt  # Python dependencies
-└── frontend/
-    └── index.html        # Full SPA — Landing, Editor, Export, Compare
+│   ├── main.py
+│   └── requirements.txt
+├── frontend/
+│   └── index.html
+├── README.md
+└── vercel.json
 ```
 
 ---
 
-## 🚀 Backend Setup (FastAPI)
+## Backend API Summary
 
-### 1. Install dependencies
+### Utility endpoints
+- `GET /api/` - service status
+- `GET /api/health` - health check
+- `GET /api/operations` - list supported operations
+
+### Image processing endpoints
+- `POST /api/process/grayscale`
+- `POST /api/process/blur`
+- `POST /api/process/sharpen`
+- `POST /api/process/brightness`
+- `POST /api/process/contrast`
+- `POST /api/process/saturation`
+- `POST /api/process/invert`
+- `POST /api/process/sepia`
+- `POST /api/process/rotate`
+- `POST /api/process/flip`
+- `POST /api/process/edge-detect`
+- `POST /api/process/emboss`
+- `POST /api/process/pixelate`
+- `POST /api/process/resize`
+- `POST /api/process/crop`
+
+All processing endpoints accept an uploaded image file and return the edited result as Base64-encoded PNG data.
+
+---
+
+## Setup and Run
+
+### 1. Install backend dependencies
 
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 2. Run the API server
+### 2. Start the backend server
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-API docs available at: **http://localhost:8000/docs**
+The API will be available at:
 
----
+- `http://localhost:8000/api/health`
+- `http://localhost:8000/docs`
 
-## 🌐 Frontend Setup
+### 3. Run the frontend
+
+Option 1: open `frontend/index.html` directly in a browser.
+
+Option 2: serve the folder locally:
 
 ```bash
 cd frontend
-python3 -m http.server 3000
-# Open http://localhost:3000
+python -m http.server 3000
 ```
 
-Or open `frontend/index.html` directly in your browser.  
-The frontend auto-detects the API at `http://localhost:8000`.
+Then open:
+
+- `http://localhost:3000`
 
 ---
 
-## ⚡ API Endpoints
+## Verification
 
-| Method | Endpoint | Params |
-|--------|----------|--------|
-| GET | `/health` | — |
-| GET | `/operations` | — |
-| POST | `/process/grayscale` | — |
-| POST | `/process/blur` | `radius` (float) |
-| POST | `/process/sharpen` | `factor` (float) |
-| POST | `/process/brightness` | `factor` (float) |
-| POST | `/process/contrast` | `factor` (float) |
-| POST | `/process/saturation` | `factor` (float) |
-| POST | `/process/invert` | — |
-| POST | `/process/sepia` | — |
-| POST | `/process/rotate` | `angle` (float) |
-| POST | `/process/flip` | `direction` (horizontal/vertical) |
-| POST | `/process/edge-detect` | — |
-| POST | `/process/emboss` | — |
-| POST | `/process/pixelate` | `block_size` (int) |
-| POST | `/process/resize` | `width`, `height` (int) |
-| POST | `/process/crop` | `left`, `top`, `right`, `bottom` (int) |
+The backend was verified locally after setup with a successful health check:
+
+- `GET /api/health` returned `{"status":"healthy"}`
+
+This confirms the API starts correctly and is ready for the frontend.
 
 ---
 
-## 🎨 Frontend Features
+## Submission Notes
 
-- **Landing screen** — drag & drop or click to import any image
-- **Editor workspace** — 3-column layout: tool rail, canvas, controls panel
-- **17 operations** across 4 categories: Color, Adjustments, Filters, Transform
-- **Sliders + numeric inputs** synced in real-time for precise control
-- **Operation history** — bottom tray shows applied steps, click to jump back
-- **Undo** — step back one operation at a time
-- **Before/After compare** — drag slider to reveal original vs processed
-- **Export modal** — download as PNG, JPEG, or WEBP with quality control
-- **API status indicator** — live connection check in nav bar
-- **Zoom controls** — 10% to 400% canvas zoom
+This project is suitable for a final submission because it demonstrates:
 
----
+- a working client-server architecture,
+- a complete set of practical image editing features,
+- a clean and responsive browser UI,
+- and a documented local setup process for reviewers.
 
-## 🔧 Design System
-
-The UI implements the **Studio Precision** design system:
-- **Fonts**: Inter (UI) + Space Grotesk (numeric inputs)
-- **Color palette**: Warm-neutral surfaces with Deep Indigo accents
-- **Layout**: 48px left tool rail + fluid canvas + 280px right control panel + 60px history tray
-- **Typography scale**: 11px labels → 13px UI → 14px headings
